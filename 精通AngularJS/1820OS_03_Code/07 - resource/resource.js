@@ -31,7 +31,9 @@ angular.module('resource', ['ngResource'])
 
     $scope.add = function () {
       var user = {
-        name:'Superhero'
+        name:'Superhero',
+        lastName: "Michael",
+        firstName: "Jackson"
       };
       Users.save(user);
     };
