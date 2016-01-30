@@ -4,7 +4,7 @@ angular.module('eventHandlers', [])
 
     $scope.items = ['foo', 'bar', 'baz'];
 
-    $scope.readPosition = function (item, $event) {
+    $scope.logPosition = function (item, $event) {
       console.log(item + ' was clicked at: ' + $event.clientX + ',' + $event.clientY);
     };
   });

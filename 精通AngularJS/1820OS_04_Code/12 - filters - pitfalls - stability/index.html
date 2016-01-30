@@ -6,8 +6,8 @@
     <script src="filtersStability.js"></script>
 </head>
 <body ng-app="filtersStability" ng-controller="RandomCtrl">
-    {{items | random}}
+    渲染HTML前发现【表达式】每次都产生了不同的结果，会报错：{{items | random}}
     <hr>
-    {{randomValue}}
+    这个则没有问题：{{randomValue}}
 </body>
 </html>
