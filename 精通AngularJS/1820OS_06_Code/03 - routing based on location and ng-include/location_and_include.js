@@ -1,42 +1,55 @@
 angular.module('location_and_include', [])
 
-  .factory('Users', function(){
+.factory('Users', function() {
 
-    var users = [
-      {name: 'Pawel'},
-      {name: 'Peter'}
-    ];
+    var users = [{
+        name: 'Pawel'
+    }, {
+        name: 'Peter'
+    }];
 
     return {
-      query: function() { return users;},
-      add : function(user) { return users.push(user);},
-      get : function(id) { return users[id];},
-      update : function(id, user) { users[id] = user;}
+        query: function() {
+            return users;
+        },
+        add: function(user) {
+            return users.push(user);
+        },
+        get: function(id) {
+            return users[id];
+        },
+        update: function(id, user) {
+            users[id] = user;
+        }
     };
-  })
+})
 
-  .controller('NavigationCtrl', function ($scope, $location) {
+.controller('NavigationCtrl', function($scope, $location) {
 
     var routes = {
-      '/admin/users/list': {templateUrl: 'templates/users/list.html'},
-      '/admin/users/new': {templateUrl: 'templates/users/new.html'},
-      '/admin/users/edit': {templateUrl: 'templates/users/edit.html'}
+        '/admin/users/list': {
+            templateUrl: 'tpls/users/list.html'
+        },
+        '/admin/users/new': {
+            templateUrl: 'tpls/users/new.html'
+        },
+        '/admin/users/edit': {
+            templateUrl: 'tpls/users/edit.html'
+        }
     };
-    var defaultRoute =  routes['/admin/users/list'];
+    var defaultRoute = routes['/admin/users/list'];
 
-    $scope.$watch(function () {
-      return $location.path();
-    }, function (newPath) {
-      $scope.selectedRoute = routes[newPath] || defaultRoute;
+    $scope.$watch(function() {
+        return $location.path();
+    }, function(newPath) {
+        $scope.selectedRoute = routes[newPath] || defaultRoute;
     });
-  })
+})
 
-  .controller('ListUsersCtrl', function($scope, Users){
+.controller('ListUsersCtrl', function($scope, Users) {
     $scope.users = Users.query();
-  })
+})
 
-  .controller('NewUserCtrl', function($scope, Users){
-  })
+.controller('NewUserCtrl', function($scope, Users) {})
 
-  .controller('EditUserCtrl', function($scope, Users){
-  })
+.controller('EditUserCtrl', function($scope, Users) {})

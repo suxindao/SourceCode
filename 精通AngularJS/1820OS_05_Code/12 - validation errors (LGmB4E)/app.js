@@ -18,4 +18,9 @@ app.controller('MainCtrl', function($scope) {
   $scope.showError = function(ngModelController, error) {
     return ngModelController.$error[error];
   };
+
+  $scope.canSave = function(){
+    return $scope.userInfoForm.$dirty && $scope.userInfoForm.$valid;
+  };
+  
 });
