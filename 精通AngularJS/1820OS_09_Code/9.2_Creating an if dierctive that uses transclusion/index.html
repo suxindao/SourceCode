@@ -1,0 +1,21 @@
+<!doctype html>
+<html ng-app="if-directive">
+
+<head>
+    <meta charset="utf-8">
+    <title>AngularJS Book - Chapter 9.2 - Creating an if dierctive that uses transclusion</title>
+    <script src="../../lib/angular/1.0.2/angular.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap-combined.min.css" rel="stylesheet">
+    <script src="directive.js"></script>
+</head>
+
+<body ng-init="model={show:true, count:0}">
+    <button ng-click="model.show = !model.show">
+        Toggle Div
+    </button>
+    <div if="model.show" ng-init="model.count = model.count+1">
+        Shown {{model.count}} times
+    </div>
+</body>
+
+</html>

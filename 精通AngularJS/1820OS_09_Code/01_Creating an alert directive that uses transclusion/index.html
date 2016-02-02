@@ -1,0 +1,18 @@
+<!doctype html>
+<html ng-app="alert-directive">
+
+<head>
+    <meta charset="utf-8">
+    <title>AngularJS Book - Chapter 9 - Creating an alert directive that uses transclusion</title>
+    <script src="../../lib/angular/1.0.2/angular.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap-combined.min.css" rel="stylesheet">
+    <script src="directive.js"></script>
+</head>
+
+<body ng-controller="alertCtrl">
+    <alert type="alert.type" close="closeAlert($index)" ng-repeat="alert in alerts">
+    	{{alert.msg}}
+    </alert>
+</body>
+
+</html>
