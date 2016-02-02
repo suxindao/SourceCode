@@ -16,7 +16,8 @@
         <input class="span6" type="email" name="email" ng-model="user.email" required unique-email>
         <span ng-show="emailForm.email.$error['required']" class="help-inline">This field is required.</span>
         <span ng-show="emailForm.email.$error['email']" class="help-inline">Please enter a valid email address.</span>
-        <span ng-show="emailForm.email.$error['uniqueEmail']" class="help-inline">This email address is not available - please enter another.</span>
+        <span ng-show="emailForm.email.$error['uniqueEmail']" class="help-inline">This email address is 
+        not available - please enter another.</span>
         <div>
             <button ng-disabled="!respondWith" ng-click="respondWith([])">Respond with email not found</button>
             <button ng-disabled="!respondWith" ng-click="respondWith([''])">Respond with email found</button>
