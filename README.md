@@ -10,7 +10,8 @@
 
 书籍如下：
 
-《精通AngularJS》
-《Node.js+MongoDB+AngularJS Web 开发》
+《精通AngularJS》<br>
+《Node.js+MongoDB+AngularJS Web 开发》<br>
+《MEAN Web开发》<br>
 
 2016-2-4
