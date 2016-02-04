@@ -1,0 +1,31 @@
+{
+  "name": "meanapp",
+  "description": "This is a demo for MEAN app.",
+  "main": "karma.conf.js",
+  "authors": [
+    "Su Xindao"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "MEAN",
+    "MongoDB",
+    "Express",
+    "Angular",
+    "Node.js"
+  ],
+  "homepage": "https://github.com/suxindao/MEANAPP",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-mocks": "~1.2",
+    "angular-resource": "~1.2",
+    "angular-route": "~1.2"
+  }
+}
