@@ -1,3 +1,5 @@
+//4.1 实现定时器 - 用时间间隔执行定期工作
+
 var x=0, y=0, z=0;
 function displayValues(){
   console.log("X=%d; Y=%d; Z=%d", x, y, z);

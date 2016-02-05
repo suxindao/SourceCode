@@ -1,17 +1,23 @@
-function logCar(car, callback){
+//4.3.3 链式回调
+
+function logCar(car, callback) {
   console.log("Saw a %s", car);
-  if(cars.length){
-    process.nextTick(function(){
+  if (cars.length) {
+    process.nextTick(function() {
       callback();
     });
   }
 }
-function logCars(cars){
+
+function logCars(cars) {
   var car = cars.pop();
-  logCar(car, function(){
+  logCar(car, function() {
     logCars(cars);
   });
 }
-var cars = ["Ferrari", "Porsche", "Bugatti", 
-            "Lamborghini", "Aston Martin"];
+
+var cars = ["Ferrari", "Porsche", "Bugatti",
+  "Lamborghini", "Aston Martin"
+];
+
 logCars(cars);

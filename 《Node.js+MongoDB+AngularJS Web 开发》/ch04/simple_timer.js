@@ -1,3 +1,5 @@
+//4.1 实现定时器 - 用超时来延迟工作
+
 function simpleTimeout(consoleTimer){
   console.timeEnd(consoleTimer);
 }
