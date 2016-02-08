@@ -1,7 +1,7 @@
 angular.module('myApp', []).
-  value('start', 200).
-  controller('Counter', ['$scope', 'start', 
-                          function($scope, start) {
+value('start', 200).
+controller('Counter', ['$scope', 'start',
+  function($scope, start) {
     $scope.start = start;
     $scope.current = start;
     $scope.difference = 0;
@@ -17,4 +17,5 @@ angular.module('myApp', []).
     $scope.calcDiff = function() {
       $scope.difference = $scope.current - $scope.start;
     };
-  }]);
+  }
+]);

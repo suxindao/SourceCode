@@ -4,6 +4,6 @@ firstApp.controller('FirstController', function($scope) {
   $scope.last = 'One';
   $scope.heading = 'Message: ';
   $scope.updateMessage = function() {
-    $scope.message = 'Hello ' + $scope.first +' '+ $scope.last + '!';
+    $scope.message = 'Hello ' + $scope.first + ' ' + $scope.last + '!';
   };
 });
