@@ -5,41 +5,47 @@ app.controller('tableController', function($scope, $http) {
   $scope.limit = 5;
   $scope.skip = 0;
   $scope.skipEnd = 0;
-  $scope.sortFields = ['Word', 'First', 'Last', 'Length', 
-                       'Vowels', 'Consonants'];
-  $scope.sortField ="Word";
+  $scope.sortFields = ['Word', 'First', 'Last', 'Length',
+    'Vowels', 'Consonants'
+  ];
+  $scope.sortField = "Word";
   $scope.direction = "asc";
-  $scope.getWords = function(){
-    $http({url: '/words', method: "GET", 
-           params:{ limit:$scope.limit, 
-                    skip:$scope.skip,
-                    sort:$scope.sortField, 
-                    direction:$scope.direction,
-                    contains:$scope.contains }})
-    .success(function(data, status, headers, config) {
-       $scope.words = data;
-       $scope.skipEnd = $scope.skip + $scope.words.length;
-     })
-     .error(function(data, status, headers, config) {
-       $scope.words = [];
-       $scope.skipEnd = $scope.skip + $scope.words.length;
-     });
+  $scope.getWords = function() {
+    $http({
+        url: '/words',
+        method: "GET",
+        params: {
+          limit: $scope.limit,
+          skip: $scope.skip,
+          sort: $scope.sortField,
+          direction: $scope.direction,
+          contains: $scope.contains
+        }
+      })
+      .success(function(data, status, headers, config) {
+        $scope.words = data;
+        $scope.skipEnd = $scope.skip + $scope.words.length;
+      })
+      .error(function(data, status, headers, config) {
+        $scope.words = [];
+        $scope.skipEnd = $scope.skip + $scope.words.length;
+      });
   };
-  $scope.find = function(){
+  $scope.find = function() {
     $scope.skip = 0;
     $scope.getWords();
   };
-  $scope.next = function(){
-    if($scope.words.length == $scope.limit){
+  $scope.next = function() {
+    if ($scope.words.length == $scope.limit) {
       $scope.skip += parseInt($scope.limit);
       $scope.getWords();
     }
   };
-  $scope.prev = function(){
-    if($scope.skip > 0){
-      if($scope.skip >= parseInt($scope.limit)){
+  $scope.prev = function() {
+    if ($scope.skip > 0) {
+      if ($scope.skip >= parseInt($scope.limit)) {
         $scope.skip -= parseInt($scope.limit);
-      } else{
+      } else {
         $scope.skip = 0;
       }
       $scope.getWords();
@@ -48,35 +54,43 @@ app.controller('tableController', function($scope, $http) {
   $scope.getWords();
 });
 app.controller('weatherController', function($scope, $http) {
-  $scope.cities = ['London', 'Paris', 'New York', 
-                   'Rome', 'Los Angeles'];
+  $scope.cities = ['London', 'Paris', 'New York',
+    'Rome', 'Los Angeles'
+  ];
   $scope.location = $scope.cities[0];
   $scope.locationIn = '';
-  $scope.getWeather = function(){
-    $http({url: '/weather', method: "GET", 
-           params:{city:$scope.location}})
-    .success(function(data, status, headers, config) {
-       $scope.weather = data;
-     })
-     .error(function(data, status, headers, config) {
-       $scope.weather = data;
-     });
+  $scope.getWeather = function() {
+    $http({
+        url: '/weather',
+        method: "GET",
+        params: {
+          city: $scope.location
+        }
+      })
+      .success(function(data, status, headers, config) {
+        $scope.weather = data;
+      })
+      .error(function(data, status, headers, config) {
+        $scope.weather = data;
+      });
   };
-  $scope.addCity = function(){
-    if ($scope.cities.indexOf($scope.locationIn) != 0){
+  $scope.addCity = function() {
+    if ($scope.cities.indexOf($scope.locationIn) != 0) {
       $scope.cities.push($scope.locationIn);
     }
     $scope.location = $scope.locationIn;
     $scope.getWeather();
   };
-  $scope.setLocation = function(city){
+  $scope.setLocation = function(city) {
     $scope.location = city;
     $scope.getWeather();
   };
   $scope.getWeather('London');
 });
 app.directive('richTabs', function() {
-  return { restrict: 'E', transclude: true,
+  return {
+    restrict: 'E',
+    transclude: true,
     scope: {},
     controller: function($scope) {
       var panes = $scope.panes = [];
@@ -97,9 +111,14 @@ app.directive('richTabs', function() {
   };
 });
 app.directive('richPane', function() {
-  return { require: '^richTabs', restrict: 'E',
-    templateUrl: '/static/rich_pane.html', 
-    transclude: true, scope: { title: '@' },
+  return {
+    require: '^richTabs',
+    restrict: 'E',
+    templateUrl: '/static/rich_pane.html',
+    transclude: true,
+    scope: {
+      title: '@'
+    },
     link: function(scope, element, attrs, tabsCtrl) {
       tabsCtrl.addPane(scope);
     }
@@ -107,11 +126,12 @@ app.directive('richPane', function() {
 });
 app.directive('richDraggable', function($document, $window) {
   return function(scope, element, attr) {
-    var startX = 0, startY = 0;
-    var x = Math.floor((Math.random()*500)+40);
-    var y = Math.floor((Math.random()*360)+40);
-    element.css({ 
-      position: 'absolute', 
+    var startX = 0,
+      startY = 0;
+    var x = Math.floor((Math.random() * 500) + 40);
+    var y = Math.floor((Math.random() * 360) + 40);
+    element.css({
+      position: 'absolute',
       cursor: 'pointer',
       top: y + 'px',
       left: x + 'px'
@@ -123,14 +143,16 @@ app.directive('richDraggable', function($document, $window) {
       $document.on('mousemove', mousemove);
       $document.on('mouseup', mouseup);
     });
+
     function mousemove(event) {
       y = event.pageY - startY;
       x = event.pageX - startX;
       element.css({
         top: y + 'px',
-        left:  x + 'px'
+        left: x + 'px'
       });
     }
+
     function mouseup() {
       $document.unbind('mousemove', mousemove);
       $document.unbind('mouseup', mouseup);

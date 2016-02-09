@@ -3,11 +3,10 @@ module.exports = function(app) {
   var customers = require('./controllers/customers_controller');
   var products = require('./controllers/products_controller');
   var orders = require('./controllers/orders_controller');
-  app.use('/static', express.static( './static')).
-      use('/images', express.static( '../images')).
-      use('/lib', express.static( '../lib')
-  );
-  app.get('/', function(req, res){
+  app.use('/static', express.static('./static')).
+  use('/images', express.static('../images')).
+  use('/lib', express.static('../lib'));
+  app.get('/', function(req, res) {
     res.render('shopping');
   });
   app.get('/products/get', products.getProducts);
