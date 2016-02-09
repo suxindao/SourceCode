@@ -3,9 +3,10 @@ angular.module('myApp', [])
     return {
       restrict: 'E',
       transclude: true,
+      replace: true,
       scope: {},
       controller: function($scope) {
-        var photos = $scope.photos = []; 
+        var photos = $scope.photos = [];
         $scope.select = function(photo) {
           angular.forEach(photos, function(photo) {
             photo.selected = false;
@@ -24,7 +25,10 @@ angular.module('myApp', [])
       require: '^myPhotos',
       restrict: 'E',
       transclude: true,
-      scope: { title: '@'},
+      replace: true,
+      scope: {
+        title: '@'
+      },
       link: function(scope, elem, attrs, photosControl) {
         photosControl.addPhoto(scope);
       },
