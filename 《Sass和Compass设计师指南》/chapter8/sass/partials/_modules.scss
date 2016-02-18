@@ -1,0 +1,394 @@
+// Main navigation links
+// ====================================================================
+[role="navigation"] {
+	padding-right: 1.5em;
+}
+.chapter-summary {
+	position: relative;
+	padding: 0 1em 0 1em;
+	a {
+		@extend %block;
+		padding: .5em 0;
+		opacity: .8;
+		border: none;
+		&:hover {
+			opacity: 1;
+		}
+		&:visited {
+			opacity: .9;
+		}
+	}
+	b {
+		@extend %block;
+	}
+	span {
+		@extend %block;
+		@include MQ(Splus) {
+			font-size: .8em;
+		}
+	}
+	display: block;
+	&:after {
+
+		position: absolute;
+		width: 10px;
+		height: 10px;
+		top: 50%;
+		right: 0;
+		margin-top: -5px;
+		margin-right: -5px;
+		border-right: 1px solid $color11;
+		border-top: 1px solid $color11;
+		@include rotate(45deg);
+	}
+}
+
+
+// Current states for each item in the navigation
+// ====================================================================
+.intro {
+	.chapter-summary {
+		&:nth-child(1) {
+			@include background(
+				linear-gradient(left,
+					transparentize(complement($color-brand), .8) 0px,
+					complement($color-brand) 96%,
+					darken(complement($color-brand), 10%) 96%,
+					darken(complement($color-brand), 10%) 99%,
+					$color11 100%));
+			&:after {
+				background-color: darken(complement($color-brand), 10%);
+				@include box-shadow(#ccc 1px -1px 2px);
+				content:"\00a0";
+			}
+			@include box-shadow(#ccc 1px 1px 2px);
+		}
+	}
+}
+
+// Testimonial
+// ====================================================================
+
+.testimonial {
+	@extend %rounded;
+	@include box-shadow(inset 0px 0px 20px transparentize(darken($blockquote-bg, 70%),.8));
+	background-color: transparentize($blockquote-bg, .7);
+	border: 3px solid transparentize(darken($blockquote-bg, 70%),.8);
+	padding: .8em .3em;
+	position: relative;
+
+	> img {
+		position: absolute;
+		width: 18%;
+		top: 10;
+		left: 20;
+		z-index: 1;
+		opacity: .2;
+	}
+	@include MQ(Splus) {
+		> img {
+			width: 15%;
+		}
+	}
+	@include MQ(Mplus) {
+		padding: 1em 2em;
+		> img {
+			display: inline-block;
+			width: 17%;
+			position: relative;
+			opacity: 1;
+		}
+	}
+}
+
+blockquote {
+	margin: 0 0 0 1em;
+	z-index: 5;
+	position: relative;
+	font-family: $blockquote;
+	font-style: italic;
+	display: inline-block;
+	vertical-align: top;
+	font-size: 1.3em;
+	@include MQ(Splus) {
+		padding: 0 .5em;
+		font-size: 1.5em;
+	}
+	@include MQ(Mplus) {
+		font-size: 1.8em;
+		margin: 0 0 0 3%;
+		width: 76%;
+	}
+	@include MQ(Lplus) {
+		font-size: 2em;
+	}
+	footer {
+		@include MQ(XSplus) {
+			font-size: .8em;
+		}
+		@include MQ(Splus) {
+			font-size: .7em;
+		}
+		@include MQ(Lplus) {
+			font-size: .6em;
+		}
+		border-top: 2px dotted darken($color11, 10%);
+		margin: 20px 0 0 0;
+		padding: 10px 0 0 0;
+	}
+}
+// Amended this from a chained selector as they can be inefficient
+.bq-small {
+	font-size: .9em;
+}
+// Header[banner] module
+// ====================================================================
+
+[role="banner"] {
+	@extend %clearfix;
+	@include background(image-url("line.png"),linear-gradient(top, darken($color-brand, 10%) 0px, darken($color-brand, 10%) 5px, lighten(complement($color-brand), 10%) 5px,  complement($color-brand) 100%));
+	@include box-shadow(#ccc 0px 3px 10px);
+	padding: 1.3em 0 1em 0;
+	margin: 0;
+}
+.header-buttons-list {
+	float: right;
+	line-height: 2em;
+	li {
+		@extend %fl;
+		display: inline-block;
+		padding: .3em 0;
+	}
+}
+.main-link {
+	@include button-links(complement(darken($color11,7%)),complement(darken($color11,4%)));
+	@include box-shadow(0px 0px 4px 0px lighten($color10, 80%));
+	&:hover {
+		@include box-shadow(0px 0px 6px 0px lighten($color10, 70%));
+	}
+}
+.main-link-headline {
+	@extend %single-transition;
+	@extend %font-lobster;
+	font-size: 2em;
+	margin: 0;
+	display: inline-block;
+	@include text-shadow(0px 0px 20px $color-brand);
+	&:hover {
+		@include text-shadow(0px 0px 20px darken($color-brand, 20%));
+	}
+	a {
+		color: $color10;
+	}
+}
+// Off canvas section to show/hide the Chapters
+// ====================================================================
+.off-canvas-navigation {
+	@extend %block;
+	width: 100%;
+	@extend %fl;
+	margin: 20px 0 10px 0;
+	// Hide at medium+ viewport sizes:
+	@include at-breakpoint($M) {
+		display: none;
+	}
+}
+// The actual button to trigger the show/hide of the off canvas area
+.sidebar-button {
+	@extend %block;
+	background-color: $color9;
+	@include button-links(complement(lighten($color7,48%)),complement(lighten($color7,40%)));
+	margin: 0;
+
+	// By default, add the word 'View' before the content
+	&:before {
+		content: ">> View ";
+	}
+	// If the buttin is active, add the word 'Hide' before the content
+	.active & {
+		&:before {
+			content: "<< Hide ";
+		}
+	}
+	// When no JavaScript, hide the off-canvas-navigation:
+	.no-js & {
+		display: none;
+	}
+}
+
+
+// Purchase links module
+// ====================================================================
+.purchase-links-wrapper {
+	list-style: none;
+	margin: 30px 0 0 0;
+}
+
+// Headline
+// ====================================================================
+
+.headline {
+	@extend %clearfix;
+	@extend %margin0;
+	font-weight: 400;
+	line-height: 1.5em;
+	margin: 0;
+	padding: 0 0 .1em 0;
+	border-bottom: 5px solid lighten($color10, 94%);
+	@include MQ(XSplus) {
+		font-size: 1.76em;
+	}
+	@include MQ(Splus) {
+		font-size: 2.5em;
+	}
+	@include MQ(Mplus) {
+		font-size: 2.8em;
+	}
+	@include MQ(Lplus) {
+		font-size: 1.7em;
+	}
+}
+
+.ampersand {
+	@extend %font-lobster;
+	@extend %headline-text-shadow;
+	font-size: 1.5em;
+	margin: 0 .1em;
+}
+
+.headline-hero {
+	@extend %font-lobster;
+	@extend %headline-text-shadow;
+	font-size: 1.5em;
+}
+
+.headline-sidekick {
+	@extend %font-lobster;
+	@extend %headline-text-shadow;
+	font-size: 1.5em;
+}
+
+.forwho {
+	background: $color-brand;
+	color: $color11;
+	letter-spacing: 1em;
+	font-style: normal;
+	font-size: .5em;
+	padding: .2em 0 .2em 1em;
+	margin: -.5em 0 .3em 0;
+	line-height: 1em;
+	@extend %fl;
+}
+
+// Text in the main content area
+// ====================================================================
+.main-content {
+	@include MQ(Mneg) {
+		padding: 0 1em;
+	}
+	@include MQ(Mplus) {
+		border-left: 5px solid lighten($color10, 94%);
+	}
+	p {
+		color: lighten($color10, 30%);
+		line-height: 1.7em;
+		margin: 2em 0;
+		@include text-shadow(0px 1px 0px $color11);
+		@include MQ(Sneg) {
+			font-size: 1.1em;
+		}
+		@include MQ(Lplus) {
+			font-size: 1.05em;
+		}
+	}
+}
+
+// ====================================================================
+// The purchase links created with inline SVGs (data URIs)
+// ====================================================================
+
+[class^="buy_"] {
+	@extend %block;
+	min-height: 2.5em;
+	background-position: 50% 50%;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+
+/*
+.buy-amazon-us {
+	background-image: inline-image("svg/amazon-us.svg");
+	.no-svg & {
+		background-image: image-url("amazon-us.png");
+	}
+}
+.buy-amazon-uk {
+	background-image: inline-image("svg/amazon-uk.svg");
+	.no-svg & {
+		background-image: image-url("amazon-uk.png");
+	}
+}
+.buy-barnes-and-noble {
+	background-image: inline-image("svg/barnes-and-noble.svg");
+	.no-svg & {
+		background-image: image-url("barnes-and-noble.png");
+	}
+}
+.buy-packt {
+	background-image: inline-image("svg/packt.svg");
+	.no-svg & {
+		background-image: image-url("packt.png");
+	}
+}
+*/
+
+.ir {
+	@include hide-text;
+}
+
+@for $i from 1 through 4 {
+  .buy_#{$i} {
+        background-image: image-url("svg/buy_#{$i}.svg");
+        .no-svg & {
+        	background-image: image-url("buy/buy_#{$i}.png");
+        }
+    }
+}
+
+// Example @each loop
+// ====================================================================
+
+$theme-complement: complement($color-theme);
+$theme-adjust: adjust-hue($color-theme, 90deg);
+$theme-shade: shade($color-theme, 10%);
+$theme-tint: tint($color-theme, 20%);
+$theme-desaturate: desaturate($color-theme, 30%);
+$theme-transparentize: transparentize($theme-adjust, .5);
+$theme-adjust20: adjust-hue($color-theme, 20deg);
+$theme-adjust40: adjust-hue($color-theme, 40deg);
+$theme-adjust-complement: adjust-hue($theme-complement, 20deg);
+$theme-adjust-complement2: adjust-hue($theme-complement, 30deg);
+
+$colors-list: $color-theme $theme-adjust-complement2 $theme-complement $theme-adjust $theme-adjust-complement $theme-shade $theme-tint $theme-desaturate $theme-adjust20 $theme-adjust40;
+
+@each $current-color in $colors-list {
+	$i: index($colors-list, $current-color);
+	.chapter-summary {
+	  	@include box-shadow(#ccc 1px 1px 2px);
+	  	&:nth-child(#{$i}) {
+	  		// Simple solid BG version
+	  		// background-color: darken(complement(adjust-hue($current-color, ($i * 10%))), 10%);
+	  		@include background(
+					linear-gradient(to right,
+						transparentize(complement( adjust-hue($current-color, ($i * 10%))), .8) 0px, complement( adjust-hue($current-color, ($i * 10deg) ) ) 96%, darken(complement( adjust-hue($current-color, ($i * 10%))), 10%) 96%, darken(complement(adjust-hue($current-color, ($i * 10%))), 10%) 99%, $color11 100%));
+	  		a {
+	  			color: invert($current-color);
+	  		}
+	  		&:after {
+				background-color: darken(complement(adjust-hue($current-color, ($i * 10%))), 10%);
+				@include box-shadow(#ccc 1px -1px 2px);
+				content:"\00a0";
+			}
+	  	}
+	}
+}

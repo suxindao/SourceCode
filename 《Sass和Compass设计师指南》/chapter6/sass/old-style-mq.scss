@@ -1,0 +1,42 @@
+@import "compass";
+@import "partials/variables";
+@import "partials/mixins";
+
+.style {
+	color: $color1;
+	@include MQ(Splus) {
+		width: 80%;
+	}
+	@include MQ(Mplus) {
+		width: 70%;
+	}
+	@include MQ(Lplus) {
+		width: 60%;
+	}
+}
+/* Lots more normal styles...
+
+...
+
+*/
+
+/* First breakpoint */
+@include MQ(Splus) {
+	.styles {
+		width: 80%;
+	}
+}
+
+/* Second breakpoint */
+@include MQ(Mplus) {
+	.styles {
+		width: 70%;
+	}
+}
+
+/* Third breakpoint */
+@include MQ(Lplus) {
+	.styles {
+		width: 60%;
+	}
+}

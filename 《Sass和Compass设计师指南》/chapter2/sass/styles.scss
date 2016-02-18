@@ -1,0 +1,27 @@
+
+// ====================================================================
+// Imports
+// ====================================================================
+
+@import "compass";
+@import "partials/variables";
+@import "partials/normalize";
+
+/*! I am loud; hear me roar */
+#main {
+	color: #999;
+	background-image: image-url('image.jpg');
+	.content {
+		color: $color10;
+	}
+}
+
+// ======================================
+// Here is a main section devide
+// ======================================
+
+// Here is a sub section divide
+// ======================================
+
+/* Here is a normal CSS comment */
+// Here is a Sass only comment

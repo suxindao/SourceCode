@@ -1,0 +1,112 @@
+// ====================================================================
+// Layout styles, should only contain rules relating to the structure
+// ====================================================================
+
+// Grid layout variables (http://susy.oddbird.net/)
+// ====================================================================
+@import "susy";
+$total-columns  : 12;             // a 12-column grid
+$column-width   : 5em;            // each column is 5em wide
+$gutter-width   : 1em;            // 1em gutters between columns
+$grid-padding   : $gutter-width;  // grid-padding equal to gutters
+
+// Use this variable if you want a fully fluid grid
+//$container-style: fluid;
+
+// Use this variable if you want to set a width for the fluid container
+//$container-width: 80%;
+
+// Use this variable for a fixed grid
+//$container-style: static;
+
+$border-box-sizing: true;
+// If you weren't setting border-box as the box-sizing elsewhere, you could uncomment the following mixin and remove the variable above:
+// @include border-box-sizing;
+
+//Switch off support for legacy Internet Explorer
+$legacy-support-for-ie  : false;
+$legacy-support-for-ie6 : $legacy-support-for-ie;
+$legacy-support-for-ie7 : $legacy-support-for-ie;
+
+* {
+	@include bs;
+}
+
+[class^="inner"] {
+	@include container;
+	overflow: hidden;
+}
+
+.inner-content {
+	padding-top: 4em;
+}
+
+[role="navigation"] {
+	@extend %single-transition;
+
+	// Accessibility layout - shows when no JavaScript
+	@include span-columns(12, 12);
+
+	// If JavaScript present, hide this section 'off-canvas'
+	.js & {
+		margin-left: -100%;
+		@include span-columns(9, 12);
+		float: left;
+		z-index: 2;
+	}
+	// If button in the 'off-canvas-navigation' area is clicked, 'active' class is applied to the body so the following styles are applied
+	.active & {
+		margin-left: 0;
+		@include span-columns(9, 12);
+	}
+
+	// Medium plus layout - applied at larger viewports
+	@include at-breakpoint($M) {
+		// if no JavaScript but media query support apply following:
+		@include span-columns(3, 12);
+		// With JavaScript AND media query support apply following:
+		.js & {
+			@include span-columns(3, 12);
+			margin-left: 0;
+		}
+	}
+}
+.main-content {
+	@extend %single-transition;
+	// Accessibility layout - shows when no JavaScript
+	@include span-columns(12, 12);
+
+	// If JavaScript present, apply these rules:
+	.js & {
+		margin-left: 0;
+		float: left;
+		z-index: 1;
+	}
+	// If button in the 'off-canvas-navigation' area is clicked, 'active' class is applied to the body so the following styles are applied
+	.active & {
+		margin-right: -100%;
+	}
+
+	// Medium plus layout - applied at larger viewports
+	@include at-breakpoint($M) {
+		@include prefix(1,12);
+		@include span-columns(9 omega,12);
+	}
+}
+
+footer[role="contentinfo"] {
+	clear: both;
+	margin-top: 3em;
+}
+
+// Grid override for purchase links
+@include with-grid-settings(4,12em,1.5em,0) {
+	.purchase-links-wrapper {
+		@include container;
+		//@include susy-grid-background;
+	}
+	.purchase-link {
+		@include span-columns(1);
+		@include nth-omega;
+	}
+};

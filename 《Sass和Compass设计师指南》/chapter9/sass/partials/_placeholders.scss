@@ -1,0 +1,69 @@
+// ====================================================================
+// Placeholder styles - these only get generated into the CSS if they are extended elsewhere
+// For example: @extend %clearfix;
+// ====================================================================
+
+%clearfix {
+	@include clearfix;
+}
+%remove-margin-top {
+	margin-top: 0;
+}
+%single-transition {
+	@include single-transition(all, .3s, ease-in-out, 0s);
+}
+%font-lobster {
+	font-family: 'Lobster13Regular';
+	font-weight: 400;
+}
+%font-cantarell {
+	font-family: 'CantarellRegular';
+}
+%font-sansation {
+	font-family: "SansationLight","HelveticaNeue-Light","Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+%fl {
+	float: left;
+}
+%block {
+	display: block;
+}
+%margin0 {
+	margin: 0;
+}
+%headline-text-shadow {
+	@include single-text-shadow;
+}
+%rounded {
+	@include border-radius;
+}
+%round-tr {
+	@include border-top-right-radius(5px);
+}
+%round-br {
+	@include border-bottom-right-radius(5px);
+}
+%round-bl {
+	@include border-bottom-left-radius(5px);
+}
+%round-tl {
+	@include border-top-left-radius(5px);
+}
+%round-top {
+	@include border-top-radius(5px); // top left and top right
+}
+%round-right {
+	@include border-right-radius(5px); // top right and bottom right
+}
+%round-bottom {
+	@include border-bottom-radius(5px); // bottom right and bottom left
+}
+%round-left {
+	@include border-left-radius(5px); // bottom left and bottom right
+}
+%pos-rel {
+	position: relative;
+}
+%pos-abs {
+	position: absolute;
+}

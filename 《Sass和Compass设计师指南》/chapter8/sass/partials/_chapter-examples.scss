@@ -1,0 +1,49 @@
+// Simple addition
+.addition {
+    width: 20% + 80%;
+}
+// Simple subtraction
+.subtraction {
+    width: 80% - 20%;
+}
+// Simple division
+.division {
+    width: (80%/20);
+}
+// Simple Multiplication
+.multiplication {
+    width: 20 * 80px;
+}
+// Division as part of another piece of arithmetic
+.addition-and-division {
+    width: 20px + 80px / 5;
+}
+.addition-and-division-parenthesis {
+    width: (20px + 80px) / 5;
+}
+
+// Using Variables
+$main-width: 60%;
+$sidebar-width: 40%;
+$full-width: $main-width + $sidebar-width;
+
+.main {
+    width: $full-width;
+}
+
+// A variable with a unit
+$variable-with-unit: 0%;
+
+// Strip the unit from the variable
+$variable-without-unit: ($variable-with-unit * 0 + 1);
+
+// A variable with no unit
+$variable-with-no-unit: 0;
+
+// Add the unit to the variable
+$variable-with-unit-added: ($variable-with-no-unit * 1%);
+
+@debug $theme-tint;
+@warn $theme-tint;
+
+@debug bb-opos($bb-flow);

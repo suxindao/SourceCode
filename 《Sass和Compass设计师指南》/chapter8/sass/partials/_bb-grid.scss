@@ -1,0 +1,280 @@
+// ====================================================================
+// Functions
+// ====================================================================
+
+// BB-opos reverses flow from left to right - used for alpha and omega elements (taken and renamed from Salsa https://github.com/tsi/Salsa)
+// ====================================================================
+
+// Returns the oposite direction of $bb-flow
+// $bb-flow: may be 'left' or 'right'.
+@function bb-opos($bb-flow) {
+	@if $bb-flow == right {
+		@return left;
+	}
+	@else {
+		@return right;
+	}
+}
+
+// This function merely removes the percentage value when a zero padding is applied via the $bb-gutter-width property.
+@function percentage-stripped($bb-gutter-width) {
+	@if $bb-gutter-width == 0 {
+		// One day I'd like to be as smart as Eric A Meyer: http://stackoverflow.com/questions/12328259/how-do-you-strip-the-unit-from-any-number-in-sass
+		@return $bb-gutter-width / ($bb-gutter-width * 0 + 1);
+	}
+	@else {
+		@return $bb-gutter-width;
+	}
+}
+
+// This simply converts the margin value from auto to a zero for calculation purposes. It is employed in the bb-container mixin
+@function margin-control($bb-grid-margin) {
+	@if $bb-grid-margin == auto {
+		@return 0;
+	}
+	@else {
+		@return $bb-grid-margin;
+	}
+}
+
+@function omegaAdjust($bb-position) {
+	@if $bb-position == omega {
+		@return $bb-columns - $bb-width - 1;
+	}
+	@else {
+		@return $bb-position;
+	}
+}
+
+// ====================================================================
+// Setting (defaults)
+// ====================================================================
+
+// Set a width for the container element in %.
+$bb-container-width: 100% !default;
+
+// Set the number of columns in the bb-grid.
+// Tip - To minimize browser rounding issues, try to use a number that 100 (the default % amount) is cleanly divisible by, e.g. use 24 instead of 12 or 5 rather than 6.
+$bb-columns: 24 !default;
+
+// Set gutter width.
+$bb-gutter-width: 1.5% !default;
+
+// Flow directionality, set $bb-flow to 'right' for an Right to Left bb-grid. $bb-opos is automatically set to the opposite of $bb-flow.
+$bb-flow: left !default;
+$bb-opos: bb-opos($bb-flow);
+
+// ====================================================================
+// Mixins - the bits you use to control things
+// ====================================================================
+
+// Apply the bb-container mixin to your outer-most container element. It defaults to a 100% wide element with margin: auto; on either side.
+
+// Example @include bb-container(5%) would add 5% margin either side and reduce the bb-container width by 10% (sum of 5% margin on either side)
+
+@mixin bb-container($bb-grid-margin: auto) {
+	width: $bb-container-width - (margin-control($bb-grid-margin) * 2);
+	margin: {
+		#{$bb-flow}: $bb-grid-margin;
+		#{$bb-opos}: $bb-grid-margin;
+	}
+	@if $bb-flow == left {
+		float: left;
+	}
+	@else {
+		float: right;
+	}
+	@include clearfix;
+}
+
+// ---------------------------------------------------------------------------
+// bb-grid Rows
+// Apply bb-row to any bb-container element to force a new bb-grid row.
+
+@mixin bb-row {
+	clear: $bb-flow;
+}
+
+// Apply bb-unrow to cancel the previous mixin's effect
+@mixin bb-unrow {
+	clear: none;
+}
+
+// bb-block is the 'Meat and Potatos' of the grid, used to specify a block width and position.
+
+// Example: @include bb-block(2,3) - a block 2 units wide, starting at position 3
+
+@mixin bb-block($bb-width, $bb-position: false) {
+
+	// Variable for the width of a single 'unit' of the grid
+	$item-width: $bb-container-width / $bb-columns;
+	// Variable for the width of a 'block' for example the span of columns
+	$block-width: $bb-container-width / $bb-columns * $bb-width;
+
+	// For the first item in a grid
+	@if $bb-position == alpha {
+
+		// Width regardless
+		width: $item-width * $bb-width;
+
+		// Clearfix regardless
+		@include clearfix;
+
+		// If we have a left to right row
+		@if $bb-flow == left {
+
+			// Flow - float right or left
+			float: #{$bb-flow};
+
+			// Position of element within grid
+			margin: {
+				#{$bb-flow}: 0;
+				#{$bb-opos}: -$item-width * $bb-width;
+			}
+
+			// Gutter control
+			padding: {
+				#{$bb-flow}: percentage-stripped($bb-gutter-width);
+				#{$bb-opos}: percentage-stripped($bb-gutter-width);
+			}
+
+		}
+		// If we have a right to left row
+		@if $bb-flow == right {
+			// Flow - float right or left
+			float: #{$bb-flow};
+
+			// Position of element within grid
+			margin: {
+				right: 0;
+				left: -$item-width * $bb-width;
+			}
+
+			// Gutter control
+			padding: {
+				left: $bb-gutter-width;
+				#{$bb-opos}: $bb-gutter-width;
+			}
+		}
+	}
+
+	// For the last item in a grid
+	@else if $bb-position == omega {
+
+		// Width regardless
+		width: $item-width * $bb-width;
+
+		// Positioning
+		@include clearfix;
+
+		$omega-position: $bb-columns - $bb-width;
+
+		@if $bb-flow == left {
+
+			// Positioning
+			float: #{$bb-flow};
+
+			margin: {
+				#{$bb-flow}: $item-width * ($bb-columns - $bb-width);
+				#{$bb-opos}: -$item-width * ($bb-columns - $bb-width) - ($bb-container-width / $bb-columns * $bb-width);
+			}
+			// Gutter control
+			padding: {
+				#{$bb-flow}: percentage-stripped($bb-gutter-width);
+				#{$bb-opos}: percentage-stripped($bb-gutter-width);
+			}
+
+		}
+
+		@if $bb-flow == right {
+
+			// Flow - float right or left
+			float: #{$bb-flow};
+
+			// Position of element within grid
+			margin: {
+				left: -$bb-width;
+				#{$bb-opos}: 0;
+			}
+
+			// Gutter control
+			padding: {
+				#{$bb-flow}: percentage-stripped($bb-gutter-width);
+				#{$bb-opos}: percentage-stripped($bb-gutter-width);
+			}
+		}
+	}
+
+	// For everything else (items that are neither alpha or omega)
+	@else if round($bb-position) == $bb-position {
+		// Width
+		width: $item-width * $bb-width;
+
+		// Positioning
+		@include clearfix;
+
+		@if $bb-flow == left {
+
+			// Flow - float right or left
+			float: #{$bb-flow};
+
+			// Position of the item
+			margin: {
+				#{$bb-flow}: ($bb-position - 1) * $item-width;
+				#{$bb-opos}: -(($bb-position - 1) + $bb-width) * $item-width;
+			}
+
+			// Gutter control
+			padding: {
+				#{$bb-flow}: percentage-stripped($bb-gutter-width);
+				#{$bb-opos}: percentage-stripped($bb-gutter-width);
+			}
+
+
+
+		}
+		@if $bb-flow == right {
+
+			// Flow - float right or left
+			float: #{$bb-opos};
+
+			// Position of the item
+			margin: {
+				right: $bb-container-width / $bb-columns * ($bb-position - 1);
+				left: -$bb-container-width / $bb-columns * ($bb-position - 1) - ($bb-container-width / $bb-columns * $bb-width);
+			}
+
+			// Gutter control
+			padding: {
+				#{$bb-flow}: percentage-stripped($bb-gutter-width);
+				#{$bb-opos}: percentage-stripped($bb-gutter-width);
+			}
+		}
+	}
+}
+
+// ---------------------------------------------------------------------------
+// bb-grid Background
+//
+
+// Apply this to your container to get a visible bb-grid background generated
+// on-the-fly using css3 gradients. These can be used for testing your elements
+// positioning on the bb-grid.
+@mixin bb-background {
+
+	$bb-space : $bb-gutter-width / 2;
+	$bb-column: $bb-container-width / $bb-columns - $bb-gutter-width;
+
+	@include column-grid-background($bb-columns, $bb-column, $bb-gutter-width, $bb-space, #15690e, #25b718, true);
+
+	// bb-grid toggler (as in Sasson)
+	background-repeat: repeat-x;
+	@include transition(background-size 0.5s);
+
+	.grid-background & {
+		background-size: 100% 0;
+	}
+	.grid-visible & {
+		background-size: 100% 100%;
+	}
+}

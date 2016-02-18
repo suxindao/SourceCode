@@ -1,0 +1,248 @@
+// Main navigation links
+// ====================================================================
+
+.chapter-summary {
+	a {
+		@extend %block;
+		padding: .5em;
+		color: $color10;
+		opacity: .8;
+		border: none;
+		&:hover {
+			opacity: 1;
+		}
+		&:visited {
+			opacity: .9;
+		}
+	}
+	b {
+		@extend %block;
+	}
+	span {
+		@extend %block;
+		@include MQ(Splus) {
+			font-size: .8em;
+		}
+	}
+}
+
+// Testimonial
+// ====================================================================
+
+.testimonial {
+	background-color: lighten($color10, 95.5%);
+	border-top: 5px solid lighten($color10, 94%);
+	border-bottom: 5px solid lighten($color10, 94%);
+	padding: .8em .3em;
+	position: relative;
+
+	> img {
+		position: absolute;
+		width: 18%;
+		top: 10;
+		left: 20;
+		z-index: 1;
+		opacity: .2;
+	}
+	@include MQ(Splus) {
+		> img {
+			width: 15%;
+		}
+	}
+	@include MQ(Mplus) {
+		padding: 1em 2em;
+		> img {
+			display: inline-block;
+			width: 17%;
+			position: relative;
+			opacity: 1;
+		}
+	}
+}
+
+blockquote {
+	margin: 0 0 0 1em;
+	z-index: 5;
+	position: relative;
+	font-family: $blockquote;
+	font-style: italic;
+	display: inline-block;
+	vertical-align: top;
+	font-size: 1.3em;
+	@include MQ(Splus) {
+		padding: 0 .5em;
+		font-size: 1.5em;
+	}
+	@include MQ(Mplus) {
+		font-size: 1.8em;
+		margin: 0 0 0 3%;
+		width: 76%;
+	}
+	@include MQ(Lplus) {
+		font-size: 2em;
+	}
+	footer {
+		@include MQ(XSplus) {
+			font-size: .8em;
+		}
+		@include MQ(Splus) {
+			font-size: .7em;
+		}
+		@include MQ(Lplus) {
+			font-size: .6em;
+		}
+		border-top: 2px dotted darken($color11, 10%);
+		margin: 20px 0 0 0;
+		padding: 10px 0 0 0;
+	}
+}
+// Amended this from a chained selector as they can be inefficient
+.bq-small {
+	font-size: .9em;
+}
+// Header[banner] module
+// ====================================================================
+
+header {
+	@extend %clearfix;
+	background-color: lighten($color10, 95.5%);
+	background-color: transparentize(lighten($color10, 95.5%), .4);
+	border-bottom: 2px solid darken($color11, 13.5%);
+	padding: 1em 0;
+	margin: 0;
+	@include box-shadow(#ccc 0 -1px 0px 0px inset, #ddd 0 1px 5px 0px);
+}
+.header-buttons-list {
+	float: right;
+	li {
+		@extend %fl;
+		display: inline-block;
+	}
+}
+.main-link {
+	@include button-links(complement(lighten($color9,48%)),complement(lighten($color9,40%)));
+}
+.main-link-headline {
+	font-size: 1em;
+	margin: 0;
+	display: inline-block;
+}
+
+// Off canvas section to show/hide the Chapters
+// ====================================================================
+.off-canvas-navigation {
+	@extend %block;
+	width: 100%;
+	@extend %fl;
+	margin: 20px 0 10px 0;
+	// Hide at medium+ viewport sizes:
+	@include at-breakpoint($M) {
+		display: none;
+	}
+}
+// The actual button to trigger the show/hide of the off canvas area
+.sidebar-button {
+	@extend %block;
+	background-color: $color9;
+	@include button-links(complement(lighten($color7,48%)),complement(lighten($color7,40%)));
+	margin: 0;
+
+	// By default, add the word 'View' before the content
+	&:before {
+		content: ">> View ";
+	}
+	// If the buttin is active, add the word 'Hide' before the content
+	.active & {
+		&:before {
+			content: "<< Hide ";
+		}
+	}
+	// When no JavaScript, hide the off-canvas-navigation:
+	.no-js & {
+		display: none;
+	}
+}
+
+
+// Purchase links module
+// ====================================================================
+.purchase-links-wrapper {
+	list-style: none;
+	margin: 30px 0 0 0;
+}
+
+// Headline
+// ====================================================================
+
+.headline {
+	@extend %clearfix;
+	@extend %margin0;
+	font-weight: 400;
+	line-height: 4.1em;
+	@include MQ(XSplus) {
+		font-size: 1.76em;
+	}
+	@include MQ(Splus) {
+		font-size: 2.5em;
+	}
+	@include MQ(Mplus) {
+		font-size: 2.8em;
+	}
+	@include MQ(Lplus) {
+		font-size: 3.7em;
+	}
+}
+
+.ampersand {
+	@extend %font-lobster;
+	font-size: 3em;
+	margin: 0 0 0 .2em;
+}
+
+.headline-hero {
+	@extend %font-lobster;
+	font-size: 3.5em;
+}
+
+.headline-sidekick {
+	@extend %font-cantarell;
+	@extend %block;
+	font-size: 1.7em;
+	letter-spacing: .3em;
+	margin-left: -.1em;
+	margin-top: -1.2em;
+	line-height: 2em;
+}
+
+.forwho {
+	background: $color-pink;
+	color: $color11;
+	letter-spacing: 1em;
+	font-style: normal;
+	font-size: .5em;
+	padding: .2em 0 .2em 1em;
+	margin: -.5em 0 1em 0;
+	line-height: 1em;
+	@extend %fl;
+}
+
+// Text in the main content area
+// ====================================================================
+.main-content {
+	@include MQ(Mneg) {
+		padding: 0 1em;
+	}
+	@include MQ(Mplus) {
+		border-left: 5px solid lighten($color10, 94%);
+	}
+	p {
+		color: lighten($color10, 20%);
+		line-height: 1.7em;
+		@include MQ(Sneg) {
+			font-size: 1.1em;
+		}
+		@include MQ(Lplus) {
+			font-size: 1.05em;
+		}
+	}
+}

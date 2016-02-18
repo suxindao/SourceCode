@@ -1,0 +1,24 @@
+%clearfix {
+	@include clearfix;
+}
+%remove-margin-top {
+	margin-top: 0;
+}
+%single-transition {
+	@include single-transition(all, .3s, ease, 0s);
+}
+%font-lobster {
+	font-family: 'Lobster13Regular';
+}
+%font-cantarell {
+	font-family: 'CantarellRegular';
+}
+%fl {
+	float: left;
+}
+%block {
+	display: block;
+}
+%margin0 {
+	margin: 0;
+}

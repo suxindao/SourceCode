@@ -1,0 +1,25 @@
+// ====================================================================
+// Layout styles, should only contain rules relating to the structure
+// ====================================================================
+* {
+	@include bs;
+}
+[class^="inner"] {
+	max-width: 75em;
+	margin: auto;
+}
+header[role="banner"],footer[role="contentinfo"] {
+	width: 100%;
+	display: block;
+}
+nav[role="navigation"] {
+	width: 25%;
+	float: left;
+}
+.main-content {
+	width: 70%;
+	float: right;
+}
+footer[role="contentinfo"] {
+	clear: both;
+}

@@ -1,0 +1,133 @@
+// Main navigation links
+// ====================================================================
+
+.chapter-summary {
+	//border-bottom: 2px dotted;
+	//&:last-child {
+	//	border: none;
+	//}
+	a {
+		display: block;
+		padding: .5em;
+		color: $color10;
+		opacity: .8;
+		border: none;
+		&:hover {
+			opacity: 1;
+		}
+		&:visited {
+			opacity: .9;
+		}
+		b {
+			display: block;
+		}
+		span {
+			display: block;
+			font-size: .8em;
+		}
+	}
+
+}
+
+// Testimonial
+// ====================================================================
+
+.testimonial {
+	background-color: lighten($color10, 95.5%);
+	border-top: 2px solid darken($color11, 13.5%);
+	border-bottom: 2px solid darken($color11, 13.5%);
+	padding: 1em 2em;
+	> img {
+		display: inline-block;
+		width: 17%;
+	}
+	blockquote {
+		margin: 0 0 0 3%;
+		padding: 0 .5em;
+		width: 76%;
+		font-family: $blockquote;
+		font-size: 2.4em;
+		font-style: italic;
+		display: inline-block;
+		vertical-align: top;
+		footer {
+			font-size: .6em;
+			border-top: 2px dotted darken($color11, 13.5%);
+			margin: 20px 0 0 0;
+			padding: 10px 0 0 0;
+		}
+	}
+	blockquote.small {
+		font-size: .9em;
+	}
+}
+
+// Header[banner] module
+// ====================================================================
+
+header {
+	@extend .testimonial;
+	@extend %clearfix;
+	border-top: none;
+	padding: 1em 0;
+	margin: 0 0 20px 0;
+	.header-buttons-list {
+		float: right;
+		& > * {
+			float: left;
+			display: inline-block;
+		}
+	}
+	.main-link {
+		@include button-links(complement(lighten($color9,48%)),complement(lighten($color9,40%)));
+	}
+	.main-link-headline {
+		font-size: 1em;
+		margin: 0;
+		display: inline-block;
+	}
+}
+
+// Off canvas section to show/hide the Chapters
+// ====================================================================
+.off-canvas-navigation {
+	display: block;
+	width: 100%;
+	float: left;
+	margin: 20px 0 10px 0;
+	// Hide at medium+ viewport sizes:
+	@include at-breakpoint($M) {
+		display: none;
+	}
+}
+// The actual button to trigger the show/hide of the off canvas area
+.sidebar-button {
+	display: block;
+	background-color: $color9;
+	@include button-links(complement(lighten($color7,48%)),complement(lighten($color7,40%)));
+	margin: 0;
+
+	// By default, add the word 'View' before the content
+	&:before {
+		content: ">> View ";
+	}
+	// If the buttin is active, add the word 'Hide' before the content
+	.active & {
+		&:before {
+			content: "<< Hide ";
+		}
+	}
+	// When no JavaScript, hide the off-canvas-navigation:
+	.no-js & {
+		display: none;
+	}
+}
+
+
+// Purchase links module
+// ====================================================================
+.purchase-links-wrapper {
+	list-style: none;
+	margin: 30px 0 0 0;
+}
+

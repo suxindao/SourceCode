@@ -1,0 +1,68 @@
+// additional rules to show the @extend directive at work
+
+.clearfix-please {
+	@extend %clearfix;
+}
+.ooh-clearfix-here-too {
+	@extend %clearfix;
+}
+.and-me {
+	@extend %clearfix;
+}
+
+// Using variables to neaten the code
+$btn-mint: complement(lighten($color9,48%));
+$btn-mint-hover: complement(lighten($color9,40%));
+.main-link {
+	@include button-links($btn-mint,$btn-mint-hover);
+}
+
+.chapter-summary {
+	// examples of color functions (adjust nth-child position to suit)
+	&:nth-child(1) a {
+		background-color: $color1;
+	}
+	&:nth-child(2) a {
+		background-color: adjust-color($color1,$lightness:-20%);
+	}
+	&:nth-child(3) a {
+		background-color: scale-color($color1,$lightness:-20%);
+	}
+	&:nth-child(4) a {
+		background-color: shade($color1,60%);
+	}
+	&:nth-child(5) a {
+		background-color: tint($color1,60%);
+	}
+	&:nth-child(2) a {
+		background-color: complement($color1);
+	}
+	&:nth-child(3) a {
+		background-color: adjust-hue($color1, 90deg);
+	}
+	&:nth-child(4) a {
+		background-color: desaturate($color1, 80%);
+	}
+	&:nth-child(5) a {
+		background-color: adjust-color($color1, $red:40, $green: 20);
+	}
+	&:nth-child(6) a {
+		background-color: transparentize($color1, .5);
+	}
+	&:nth-child(7) a {
+		background-color: grayscale($color1);
+	}
+	&:nth-child(8) a {
+		background-color: mix($color1,$color2,60%);
+	}
+	&:nth-child(9) a {
+		background-color: rgba(mix($color1,$color2,60%),.7);
+	}
+}
+
+// Chaining selectors
+.selector-one {
+	&.selector-two {
+		color: green;
+	}
+}

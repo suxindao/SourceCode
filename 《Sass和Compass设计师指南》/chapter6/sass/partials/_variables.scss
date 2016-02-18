@@ -1,0 +1,25 @@
+$color1: #FF0000; // Red
+$color2: #FFBF00; // Orange
+$color3: #FFFF00; // Yellow
+$color4: #7FFF00; // Green
+$color5: #007FFF; // Light Blue
+$color6: #00FFFF; // Cyan
+$color7: #0000FF; // Blue
+$color8: #7F00FF; // Purple
+$color9: #FF00FF; // Magenta
+$color10: #000; // Black
+$color11: #FFF; // White
+$color-pink: pink; // Yep, pink!
+
+// Fonts
+$blockquote: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
+
+// Mixin variables
+$defined-bs-type: border-box !default;
+
+// Breakpoint variables
+// ====================================================================
+$XS: 18em; // roughly speaking, around 288px wide with 16px body font
+$S: 30em; // roughly speaking, around 480px wide with 16px body font
+$M: 43em; // roughly speaking, around 688px wide with 16px body font
+$L: 57em; // roughly speaking, around 912px wide with 16px body font

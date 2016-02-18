@@ -1,0 +1,65 @@
+$color1: #FF0000; // Red
+$color2: #FFBF00; // Orange
+$color3: #FFFF00; // Yellow
+$color4: #7FFF00; // Green
+$color5: #007FFF; // Light Blue
+$color6: #00FFFF; // Cyan
+$color7: #0000FF; // Blue
+$color8: #7F00FF; // Purple
+$color9: #FF00FF; // Magenta
+$color10: #000; // Black
+$color11: #FFF; // White
+$color-brand: pink; // Yep, pink!
+$blockquote-bg: #faebbe; // Yellowy
+$color-link: #3D518F; // blue-dark
+
+// A simple theme switcher
+// ====================================================================
+
+$color-theme: pink;
+
+@if $color-theme == pink {
+	$color-brand: pink;
+} @else if $color-theme == orange {
+	$color-brand: #ff9900;
+}
+
+$theme-complement: complement($color-theme);
+$theme-invert: invert($color-theme);
+$theme-adjust: adjust-hue($color-theme, 90deg);
+$theme-shade: shade($color-theme, 20%);
+$theme-tint: tint($color-theme, 20%);
+
+// Fonts
+$blockquote: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
+
+// Mixin variables
+$defined-bs-type: border-box !default;
+
+// Breakpoint variables
+// ====================================================================
+$XS: 18em; // roughly speaking, around 288px wide with 16px body font
+$S: 30em; // roughly speaking, around 480px wide with 16px body font
+$M: 43em; // roughly speaking, around 688px wide with 16px body font
+$L: 57em; // roughly speaking, around 912px wide with 16px body font
+
+// Default values for text-shadow mixin
+// ====================================================================
+
+$default-text-shadow-color: darken($color11,20%);
+$default-text-shadow-blur: 0px;
+$default-text-shadow-v-offset: 4px;
+$default-text-shadow-h-offset: 3px;
+
+// Default values for box-shadow mixin
+// ====================================================================
+$default-box-shadow-color: lighten($color10, 50%);
+$default-box-shadow-h-offset: 1px;
+$default-box-shadow-v-offset: 1px;
+$default-box-shadow-blur: 2px;
+$default-box-shadow-spread: false;
+$default-box-shadow-inset: false;
+
+// Default value for border-radius
+// ====================================================================
+$default-border-radius: 5px;

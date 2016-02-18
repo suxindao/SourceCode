@@ -1,0 +1,12 @@
+// Isolate grid mixin examples
+.grid-item-wrapper {
+	@include span-columns(9 omega,12);
+}
+.grid-item {
+	@include isolate-grid(1,9);
+}
+.grid-item {
+	background-color: red;
+	color: white;
+	text-shadow: 1px 1px 1px #000;
+}
